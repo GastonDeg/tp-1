@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/styles.css">
+<title>Inicio</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Panificados Don Atilio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">Acerca de</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+        </ul>
+    </div>
+    </nav>
+</header>
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center">Panificados Don Atilio</h1>
+    <input type="text" id="searchInput" class="form-control mb-4" placeholder="Buscar...">
+    <ul id="productList" class="list-group"></ul>
+</div>
+
+<script>
+    const products = [
+        { name: 'Facturas', price: 5 },
+        { name: 'Panes', price: 10},
+        { name: 'Panes integral', price: 25},
+        { name: 'Panes de centeno', price: 33},
+        { name: 'Panes de masa madre', price: 45},
+        { name: 'Panes multicereales', price: 95},
+        { name: 'Panes Baguette', price: 55},
+        { name: 'Panes Pumpernickel bread', price: 15},
+        { name: 'Panes Chapata', price: 50},
+        { name: 'Panes Challah', price: 22},
+    ];
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(query) || 
+        product.price.toString().includes(query)
+        );
+        displayProducts(filteredProducts);
+    });
+
+    function displayProducts(products) {
+        const productList = document.getElementById('productList');
+        productList.innerHTML = products.map(product => 
+        `<li class="list-group-item">${product.name} - $${product.price}</li>`
+        ).join('');
+    }
+
+    displayProducts(products);
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
